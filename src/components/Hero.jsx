@@ -76,31 +76,30 @@ const Hero = () => {
           I build exceptional digital experiences with clean code and innovative solutions. Currently based in India.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 mb-12">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-200/50"
-          >
-            <FiDownload />
-                      <a href="/Khadeeja_Tariq_Resume (4).pdf" download>
-
-            Download Resume
-            </a>
-          </motion.button>
-         <a href="#contact" className="inline-block">
+        <div className="flex flex-col sm:flex-row gap-4 mb-12 items-center justify-center">
   <motion.button
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
-    className="flex items-center justify-center gap-2 border-2 border-gray-900 text-gray-900 px-6 py-3 rounded-full hover:bg-gray-900 hover:text-white transition-all duration-300"
+    className="flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-200/50"
   >
-    <FiMail />
-    Contact Me
+    <FiDownload />
+    <a href="/Khadeeja_Tariq_Resume (4).pdf" download>
+      Download Resume
+    </a>
   </motion.button>
-</a>
 
+  <a href="#contact" className="inline-block">
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className="flex items-center justify-center gap-2 border-2 border-gray-900 text-gray-900 px-6 py-3 rounded-full hover:bg-gray-900 hover:text-white transition-all duration-300"
+    >
+      <FiMail />
+      Contact Me
+    </motion.button>
+  </a>
+</div>
 
-        </div>
 
         {/* Social Links */}
         <motion.div 
