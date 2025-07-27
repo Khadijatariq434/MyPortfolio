@@ -37,12 +37,34 @@ const Navbar = () => {
   return () => window.removeEventListener('scroll', handleScroll);
 }, []);
 
+  // const scrollTo = (id) => {
+  //   const element = document.getElementById(id);
+  //   if (element) {
+  //     element.scrollIntoView({ behavior: 'smooth' });
+  //     setIsMenuOpen(false);
+  //   }
+  // };
+
   const scrollTo = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
+    setIsMenuOpen(false); // Close menu immediately
+    
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        // Add scroll margin dynamically
+        element.style.scrollMarginTop = '80px';
+        
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+        
+        // Remove the style after scroll completes
+        setTimeout(() => {
+          element.style.scrollMarginTop = '';
+        }, 1000);
+      }
+    }, 300); // Match menu close animation duration
   };
 
   const navItems = ['home', 'about', 'skills', 'work', 'contact'];

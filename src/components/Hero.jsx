@@ -88,14 +88,18 @@ const Hero = () => {
             Download Resume
             </a>
           </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center gap-2 border-2 border-gray-900 text-gray-900 px-6 py-3 rounded-full hover:bg-gray-900 hover:text-white transition-all duration-300"
-          >
-            <FiMail />
-            Contact Me
-          </motion.button>
+         <a href="#contact" className="inline-block">
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="flex items-center justify-center gap-2 border-2 border-gray-900 text-gray-900 px-6 py-3 rounded-full hover:bg-gray-900 hover:text-white transition-all duration-300"
+  >
+    <FiMail />
+    Contact Me
+  </motion.button>
+</a>
+
+
         </div>
 
         {/* Social Links */}

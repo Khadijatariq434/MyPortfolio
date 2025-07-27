@@ -21,17 +21,8 @@ const projects = [
     github: "https://github.com/Khadijatariq434/Chatify",
     live: "#"
   },
-  {
+    {
     id: 3,
-    title: "Note App",
-    description: "A backend-powered note-taking app built with Node.js, Express, and EJS, allowing users to add, edit, and delete notes.",
-    tags: ["Node.js", "Ejs", "MongoDb"],
-    image: "/NoteApp.png",
-    github: "https://github.com/Khadijatariq434/noteApp",
-    live: "#"
-  },
-  {
-    id: 4,
     title: "Quality Arts",
     description: "A creative platform to showcase my digital artworks and designs, highlighting my passion for aesthetics and visual storytelling.",
     tags: ["React", "Express", "Tailwind", "Mongodb"],
@@ -39,6 +30,16 @@ const projects = [
     github: "https://github.com/Khadijatariq434/noteApp",
     live: "#"
   },
+  {
+    id: 4,
+    title: "Note App",
+    description: "A backend-powered note-taking app built with Node.js, Express, and EJS, allowing users to add, edit, and delete notes.",
+    tags: ["Node.js", "Ejs", "MongoDb"],
+    image: "/NoteApp.png",
+    github: "https://github.com/Khadijatariq434/noteApp",
+    live: "#"
+  },
+
   {
     id: 5,
     title: "Airbnb Clone",
