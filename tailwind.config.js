@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}", // Ensures Tailwind works in all components
   ],
+  darkMode: 'class',
   theme: {
     extend: {},
   },

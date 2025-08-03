@@ -79,7 +79,7 @@ const Hero = () => {
     {/* Buttons */}
     <div className="flex flex-col sm:flex-row gap-4 mb-10 items-center">
       <a
-        href="/Khadeeja_Tariq_Resume (4).pdf"
+        href="/khadeeja_resume.pdf"
         download
         className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-200/50"
       >

@@ -65,8 +65,8 @@ const About = () => {
         </div>
 
         <button className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-200/50">
-          <a href="/Khadeeja_Tariq_MERN_CV.pdf" download>
-          Download CV</a>
+          <a href="/khadeeja_resume.pdf" download>
+          Download Resume</a>
           
         </button>
       </motion.div>
