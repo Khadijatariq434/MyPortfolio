@@ -21,7 +21,7 @@ const projects = [
     github: "https://github.com/Khadijatariq434/Chatify",
     live: "#"
   },
-    {
+  {
     id: 3,
     title: "Quality Arts",
     description: "A creative platform to showcase my digital artworks and designs, highlighting my passion for aesthetics and visual storytelling.",
@@ -39,7 +39,6 @@ const projects = [
     github: "https://github.com/Khadijatariq434/noteApp",
     live: "#"
   },
-
   {
     id: 5,
     title: "Airbnb Clone",
@@ -51,13 +50,29 @@ const projects = [
   }
 ];
 
-const Work = () => {
+const Work = ({ isDarkMode }) => {
   const [showAll, setShowAll] = useState(false);
   const displayedProjects = showAll ? projects : projects.slice(0, 3);
 
+  // Dynamic classes based on dark mode
+  const textColor = isDarkMode ? 'text-white' : 'text-gray-900';
+  const secondaryTextColor = isDarkMode ? 'text-gray-300' : 'text-gray-600';
+  const accentColor = isDarkMode ? 'text-blue-400' : 'text-blue-600';
+  const cardBg = isDarkMode ? 'bg-gray-800/50' : 'bg-white/50';
+  const cardBorder = isDarkMode ? 'border-gray-700/30' : 'border-gray-200/30';
+  const tagBg = isDarkMode ? 'bg-blue-900/30 text-blue-300' : 'bg-blue-50 text-blue-600';
+  const buttonBorder = isDarkMode ? 'border-gray-300 text-white hover:bg-gray-700' : 'border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white';
+  const imageBg = isDarkMode ? 'bg-gray-700/30' : 'bg-blue-50';
+
   return (
-    <section id="work" className="py-20 px-6 md:px-16 max-w-6xl mx-auto bg-white"
-    style={{ scrollMarginTop: '100px' }}>
+    <section 
+      id="work" 
+      className="py-20 px-6 md:px-16 max-w-6xl mx-auto"
+      style={{ 
+        scrollMarginTop: '100px',
+        backdropFilter: 'blur(4px)'
+      }}
+    >
       {/* Section Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -66,10 +81,10 @@ const Work = () => {
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          My <span className="text-blue-600">Projects</span>
+        <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${textColor}`}>
+          My <span className={accentColor}>Projects</span>
         </h2>
-        <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
+        <div className={`w-20 h-1 ${accentColor} mx-auto`}></div>
       </motion.div>
 
       {/* Projects Grid */}
@@ -82,9 +97,9 @@ const Work = () => {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
             whileHover={{ y: -5 }}
-            className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+            className={`${cardBg} rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border ${cardBorder} backdrop-blur-sm`}
           >
-            <div className="h-48 bg-blue-50 relative overflow-hidden">
+            <div className={`h-48 ${imageBg} relative overflow-hidden`}>
               <img 
                 src={project.image} 
                 alt={project.title} 
@@ -93,14 +108,14 @@ const Work = () => {
             </div>
             
             <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-2">{project.title}</h3>
-              <p className="text-gray-600 mb-4">{project.description}</p>
+              <h3 className={`text-xl font-bold mb-2 ${textColor}`}>{project.title}</h3>
+              <p className={`${secondaryTextColor} mb-4`}>{project.description}</p>
               
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.tags.map(tag => (
                   <span 
                     key={tag} 
-                    className="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full"
+                    className={`px-3 py-1 ${tagBg} text-xs font-medium rounded-full`}
                   >
                     {tag}
                   </span>
@@ -112,7 +127,7 @@ const Work = () => {
                   href={project.github} 
                   target='_blank'
                   rel="noopener noreferrer"
-                  className="flex items-center text-gray-700 hover:text-blue-600 transition-colors"
+                  className={`flex items-center ${secondaryTextColor} hover:${accentColor} transition-colors`}
                   aria-label="GitHub repository"
                 >
                   <FiGithub className="mr-2" /> Code
@@ -121,7 +136,7 @@ const Work = () => {
                   href={project.live} 
                   target='_blank'
                   rel="noopener noreferrer"
-                  className="flex items-center text-gray-700 hover:text-blue-600 transition-colors"
+                  className={`flex items-center ${secondaryTextColor} hover:${accentColor} transition-colors`}
                   aria-label="Live demo"
                 >
                   <FiExternalLink className="mr-2" /> Live Demo
@@ -140,12 +155,14 @@ const Work = () => {
         viewport={{ once: true }}
         className="text-center mt-16"
       >
-        <button 
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => setShowAll(!showAll)}
-          className="border-2 border-gray-900 text-gray-900 px-8 py-3 rounded-full hover:bg-gray-900 hover:text-white transition-all duration-300 font-medium"
+          className={`border-2 ${buttonBorder} px-8 py-3 rounded-full transition-all duration-300 font-medium`}
         >
           {showAll ? 'Show Less' : 'View All Projects'}
-        </button>
+        </motion.button>
       </motion.div>
     </section>
   );

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -7,17 +8,23 @@ import Skills from "./components/Skills";
 import Work from "./components/Work";
 
 const App = () => {
-  return(
-   <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white mt-10">
-      <Navbar />
-      <main>
-        <Hero />
-        <About/>
-        <Skills/>
-        <Work/>
-        <Contact/>
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  return (
+    <div className={`min-h-screen transition-colors duration-300 ${
+      isDarkMode 
+        ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white' 
+        : 'bg-gradient-to-br from-blue-50 to-white'
+    }`}>
+      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      <main className="pt-12 md:pt-20"> {/* Add padding top equal to navbar height */}
+        <Hero isDarkMode={isDarkMode} />
+        <About isDarkMode={isDarkMode} />
+        <Skills isDarkMode={isDarkMode} />
+        <Work isDarkMode={isDarkMode} />
+        <Contact isDarkMode={isDarkMode} />
       </main>
-      <Footer/>
+      <Footer isDarkMode={isDarkMode} />
     </div>
   )
 };

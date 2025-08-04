@@ -1,80 +1,84 @@
-import { useState, useEffect } from 'react';
-import { FiMenu, FiX, FiGithub, FiLinkedin, FiTwitter, FiMail, FiInstagram } from 'react-icons/fi';
+import { FiMenu, FiX, FiGithub, FiLinkedin, FiTwitter, FiMail, FiInstagram, FiMoon, FiSun } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
-const Navbar = () => {
+const Navbar = ({ isDarkMode, setIsDarkMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
 
- useEffect(() => {
-  const handleScroll = () => {
-    setScrolled(window.scrollY > 10);
-    
-    const sections = ['home', 'about', 'skills', 'work', 'contact'];
-    const offset = 150; // Increased from 100 to better handle varying section heights
-    
-    for (const section of sections) {
-      const element = document.getElementById(section);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        // More flexible detection that works for both short and tall sections
-        const isInView = (
-          (rect.top <= offset && rect.bottom >= offset) || // Center detection
-          (rect.top >= 0 && rect.top <= offset) || // Top entering view
-          (rect.bottom >= window.innerHeight - offset && rect.bottom <= window.innerHeight) // Bottom exiting view
-        );
-        
-        if (isInView) {
-          setActiveSection(section);
-          break;
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+      
+      const sections = ['home', 'about', 'skills', 'work', 'contact'];
+      const offset = 150;
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const isInView = (
+            (rect.top <= offset && rect.bottom >= offset) ||
+            (rect.top >= 0 && rect.top <= offset) ||
+            (rect.bottom >= window.innerHeight - offset && rect.bottom <= window.innerHeight)
+          );
+          
+          if (isInView) {
+            setActiveSection(section);
+            break;
+          }
         }
       }
-    }
-  };
+    };
 
-  window.addEventListener('scroll', handleScroll);
-  return () => window.removeEventListener('scroll', handleScroll);
-}, []);
-
-  // const scrollTo = (id) => {
-  //   const element = document.getElementById(id);
-  //   if (element) {
-  //     element.scrollIntoView({ behavior: 'smooth' });
-  //     setIsMenuOpen(false);
-  //   }
-  // };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollTo = (id) => {
-    setIsMenuOpen(false); // Close menu immediately
+    setIsMenuOpen(false);
     
     setTimeout(() => {
       const element = document.getElementById(id);
       if (element) {
-        // Add scroll margin dynamically
         element.style.scrollMarginTop = '80px';
-        
         element.scrollIntoView({ 
           behavior: 'smooth',
           block: 'start'
         });
         
-        // Remove the style after scroll completes
         setTimeout(() => {
           element.style.scrollMarginTop = '';
         }, 1000);
       }
-    }, 300); // Match menu close animation duration
+    }, 300);
   };
 
   const navItems = ['home', 'about', 'skills', 'work', 'contact'];
 
+  // Dynamic classes based on dark mode
+  const textColor = isDarkMode ? 'text-white' : 'text-gray-900';
+  const iconColor = isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-500 hover:text-blue-600';
+  const hoverBgColor = isDarkMode ? 'hover:bg-blue-900/20' : 'hover:bg-blue-50';
+  const navBgColor = scrolled 
+    ? isDarkMode 
+      ? 'bg-gray-900/95 backdrop-blur-sm shadow-md' 
+      : 'bg-white/95 backdrop-blur-sm shadow-md'
+    : 'bg-transparent backdrop-blur-sm';
+  const borderColor = isDarkMode ? 'border-gray-700' : 'border-gray-200';
+  const menuBgColor = isDarkMode 
+    ? 'bg-gradient-to-b from-gray-900/95 to-gray-800/95' 
+    : 'bg-gradient-to-b from-blue-50/95 to-white/95';
+  const navItemActive = isDarkMode 
+    ? 'bg-blue-900/30 text-blue-400' 
+    : 'bg-blue-100 text-blue-600';
+  const navItemInactive = isDarkMode 
+    ? 'text-gray-300 hover:bg-gray-800 hover:text-white' 
+    : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900';
+
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-      scrolled 
-        ? 'bg-white/95 backdrop-blur-sm shadow-md' 
-        : 'bg-transparent backdrop-blur-sm'
-    }`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navBgColor}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo/Name */}
@@ -85,7 +89,7 @@ const Navbar = () => {
             className="flex-shrink-0"
           >
             <h1 
-              className="text-xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors"
+              className={`text-xl font-bold cursor-pointer hover:text-blue-600 transition-colors ${textColor}`}
               onClick={() => scrollTo('home')}
             >
               Khadeeja Tariq
@@ -104,9 +108,7 @@ const Navbar = () => {
                   <button
                     onClick={() => scrollTo(item)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 ${
-                      activeSection === item 
-                        ? 'bg-blue-100 text-blue-600' 
-                        : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                      activeSection === item ? navItemActive : navItemInactive
                     }`}
                   >
                     {item.charAt(0).toUpperCase() + item.slice(1)}
@@ -116,53 +118,65 @@ const Navbar = () => {
             </ul>
 
             {/* Social Icons (Desktop) */}
-            <div className="ml-6 flex items-center space-x-3 border-l border-gray-200 pl-6">
+            <div className={`ml-6 flex items-center space-x-3 border-l ${borderColor} pl-6`}>
               <a 
-            href="https://github.com/Khadijatariq434"
-            target='_blank'
-                className="text-gray-500 hover:text-blue-600 p-1.5 rounded-full hover:bg-blue-50 transition-colors"
+                href="https://github.com/Khadijatariq434"
+                target='_blank'
+                className={`p-1.5 rounded-full transition-colors ${iconColor} ${hoverBgColor}`}
                 aria-label="GitHub"
               >
                 <FiGithub size={18} />
               </a>
               <a 
-                 href="https://www.linkedin.com/in/khadeeja-tariq-b502ba341/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-            target='_blank'
-                className="text-gray-500 hover:text-blue-600 p-1.5 rounded-full hover:bg-blue-50 transition-colors"
+                href="https://www.linkedin.com/in/khadeeja-tariq-b502ba341/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                target='_blank'
+                className={`p-1.5 rounded-full transition-colors ${iconColor} ${hoverBgColor}`}
                 aria-label="LinkedIn"
               >
                 <FiLinkedin size={18} />
               </a>
               <a 
-                  href="https://www.instagram.com/me.khadijatariq/"
+                href="https://www.instagram.com/me.khadijatariq/"
                 target='_blank'
-                  className="text-gray-500 hover:text-blue-600 p-1.5 rounded-full hover:bg-blue-50 transition-colors"
-                aria-label="Twitter"
+                className={`p-1.5 rounded-full transition-colors ${iconColor} ${hoverBgColor}`}
+                aria-label="Instagram"
               >
                 <FiInstagram size={18} />
               </a>
-              {/* <motion.button
+              <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => scrollTo('contact')}
-                className="ml-2 flex items-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm hover:bg-blue-700 transition-colors"
+                onClick={() => setIsDarkMode(!isDarkMode)}
+                className={`p-1.5 rounded-full transition-colors ${iconColor} ${hoverBgColor}`}
+                aria-label="Toggle Dark Mode"
               >
-                <FiMail size={16} />
-                <span>Contact</span>
-              </motion.button> */}
+                {isDarkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
+              </motion.button>
             </div>
           </div>
 
-          {/* Mobile menu button */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none transition-colors"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-          </motion.button>
+          {/* Mobile menu button and dark mode toggle */}
+          <div className="md:hidden flex items-center space-x-3">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className={`p-1.5 rounded-full transition-colors ${iconColor} ${hoverBgColor}`}
+              aria-label="Toggle Dark Mode"
+            >
+              {isDarkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className={`p-1.5 rounded-full transition-colors ${iconColor} ${hoverBgColor}`}
+              aria-label="Toggle Menu"
+            >
+              {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            </motion.button>
+          </div>
         </div>
       </div>
 
@@ -174,7 +188,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden bg-gradient-to-b from-blue-50/95 to-white/95"
+            className={`md:hidden overflow-hidden ${menuBgColor}`}
           >
             <div className="px-4 pb-4 space-y-2">
               {navItems.map((item) => (
@@ -185,42 +199,39 @@ const Navbar = () => {
                   transition={{ duration: 0.3 }}
                   onClick={() => scrollTo(item)}
                   className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-colors ${
-                    activeSection === item
-                      ? 'bg-blue-100 text-blue-600'
-                      : 'text-gray-700 hover:bg-gray-100'
+                    activeSection === item ? navItemActive : navItemInactive
                   }`}
                 >
                   {item.charAt(0).toUpperCase() + item.slice(1)}
                 </motion.button>
               ))}
               
-              <div className="pt-4 border-t border-gray-200 mt-2 flex justify-center space-x-4">
+              <div className={`pt-4 border-t ${borderColor} mt-2 flex justify-center space-x-4`}>
                 <a 
-            href="https://github.com/Khadijatariq434"
-            target='_blank'
-                  className="text-gray-700 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors"
+                  href="https://github.com/Khadijatariq434"
+                  target='_blank'
+                  className={`p-2 rounded-full transition-colors ${iconColor} ${hoverBgColor}`}
                   aria-label="GitHub"
                 >
                   <FiGithub size={20} />
                 </a>
                 <a 
-                   href="https://www.linkedin.com/in/khadeeja-tariq-b502ba341/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-            target='_blank'
-                  className="text-gray-700 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors"
+                  href="https://www.linkedin.com/in/khadeeja-tariq-b502ba341/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                  target='_blank'
+                  className={`p-2 rounded-full transition-colors ${iconColor} ${hoverBgColor}`}
                   aria-label="LinkedIn"
                 >
                   <FiLinkedin size={20} />
                 </a>
                 <a 
                   href="https://www.instagram.com/me.khadijatariq/"
-                  target='_blank' 
-                  className="text-gray-700 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors"
-                  aria-label="Twitter"
+                  target='_blank'
+                  className={`p-2 rounded-full transition-colors ${iconColor} ${hoverBgColor}`}
+                  aria-label="Instagram"
                 >
                   <FiInstagram size={20} />
                 </a>
               </div>
-              
             </div>
           </motion.div>
         )}

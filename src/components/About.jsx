@@ -1,9 +1,22 @@
 import { motion } from 'framer-motion';
 import { FiAward, FiCode, FiUsers } from 'react-icons/fi';
 
-const About = () => {
+const About = ({ isDarkMode }) => {
+  // Dynamic classes based on dark mode
+  const textColor = isDarkMode ? 'text-white' : 'text-gray-900';
+  const secondaryTextColor = isDarkMode ? 'text-gray-300' : 'text-gray-600';
+  const accentColor = isDarkMode ? 'text-blue-400' : 'text-blue-600';
+  const cardBg = isDarkMode ? 'bg-gray-800/50' : 'bg-white/50';
+  const cardBorder = isDarkMode ? 'border-gray-700/50' : 'border-gray-200/50';
+  const buttonBg = isDarkMode ? 'bg-blue-700 hover:bg-blue-600' : 'bg-blue-600 hover:bg-blue-700';
+  const buttonShadow = isDarkMode ? 'hover:shadow-blue-900/20' : 'hover:shadow-blue-200/50';
+
   return (
-    <section id="about" className="py-20 px-6 md:px-16 max-w-6xl mx-auto">
+    <section 
+      id="about" 
+      className="py-20 px-6 md:px-16 max-w-6xl mx-auto"
+      style={{ backdropFilter: 'blur(4px)' }}
+    >
       {/* Section Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -12,13 +25,13 @@ const About = () => {
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          About <span className="text-blue-600">Me</span>
+        <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${textColor}`}>
+          About <span className={accentColor}>Me</span>
         </h2>
-        <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
+        <div className={`w-20 h-1 ${accentColor} mx-auto`}></div>
       </motion.div>
 
-      {/* Only Content Section (Full Width) */}
+      {/* Content Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -26,12 +39,12 @@ const About = () => {
         viewport={{ once: true }}
         className="text-center max-w-3xl mx-auto"
       >
-        <h3 className="text-2xl font-bold text-gray-800 mb-6">
+        <h3 className={`text-2xl font-bold mb-6 ${textColor}`}>
           MERN Stack Developer from India
         </h3>
 
-        <p className="text-gray-600 mb-6 leading-relaxed">
-          I'm <span className="font-semibold text-blue-600">Khadeeja Tariq</span>, a recent BCA graduate from BIMT Budaun with a strong passion for backend development.
+        <p className={`${secondaryTextColor} mb-6 leading-relaxed`}>
+          I'm <span className={`font-semibold ${accentColor}`}>Khadeeja Tariq</span>, a recent BCA graduate from BIMT Budaun with a strong passion for backend development.
           <br /><br />
           I specialize in the MERN stack — MongoDB, Express.js, React, and Node.js — with a deep interest in building efficient APIs, secure authentication systems, and clean, modular backend architectures.
           <br /><br />
@@ -39,36 +52,52 @@ const About = () => {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow text-center">
+          {/* Project Card */}
+          <motion.div 
+            whileHover={{ y: -5 }}
+            className={`${cardBg} p-6 rounded-xl border ${cardBorder} shadow-md hover:shadow-lg transition-all backdrop-blur-sm`}
+          >
             <div className="flex justify-center mb-4">
-              <FiCode className="text-blue-600 text-3xl" />
+              <FiCode className={`${accentColor} text-3xl`} />
             </div>
-            <h4 className="font-bold text-gray-800 mb-2">5+ Projects</h4>
-            <p className="text-gray-600 text-sm">Built using the MERN stack</p>
-          </div>
+            <h4 className={`font-bold mb-2 ${textColor}`}>5+ Projects</h4>
+            <p className={`text-sm ${secondaryTextColor}`}>Built using the MERN stack</p>
+          </motion.div>
 
-          <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow text-center">
+          {/* Learning Card */}
+          <motion.div 
+            whileHover={{ y: -5 }}
+            className={`${cardBg} p-6 rounded-xl border ${cardBorder} shadow-md hover:shadow-lg transition-all backdrop-blur-sm`}
+          >
             <div className="flex justify-center mb-4">
-              <FiUsers className="text-blue-600 text-3xl" />
+              <FiUsers className={`${accentColor} text-3xl`} />
             </div>
-            <h4 className="font-bold text-gray-800 mb-2">Always Learning</h4>
-            <p className="text-gray-600 text-sm">Open to collaborations and internships</p>
-          </div>
+            <h4 className={`font-bold mb-2 ${textColor}`}>Always Learning</h4>
+            <p className={`text-sm ${secondaryTextColor}`}>Open to collaborations and internships</p>
+          </motion.div>
 
-          <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow text-center">
+          {/* Graduate Card */}
+          <motion.div 
+            whileHover={{ y: -5 }}
+            className={`${cardBg} p-6 rounded-xl border ${cardBorder} shadow-md hover:shadow-lg transition-all backdrop-blur-sm`}
+          >
             <div className="flex justify-center mb-4">
-              <FiAward className="text-blue-600 text-3xl" />
+              <FiAward className={`${accentColor} text-3xl`} />
             </div>
-            <h4 className="font-bold text-gray-800 mb-2">Fresh Graduate</h4>
-            <p className="text-gray-600 text-sm">Ready to enter the professional world</p>
-          </div>
+            <h4 className={`font-bold mb-2 ${textColor}`}>Fresh Graduate</h4>
+            <p className={`text-sm ${secondaryTextColor}`}>Ready to enter the professional world</p>
+          </motion.div>
         </div>
 
-        <button className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-200/50">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className={`${buttonBg} text-white px-6 py-3 rounded-full transition-all duration-300 shadow-lg ${buttonShadow}`}
+        >
           <a href="/khadeeja_resume.pdf" download>
-          Download Resume</a>
-          
-        </button>
+            Download Resume
+          </a>
+        </motion.button>
       </motion.div>
     </section>
   );
