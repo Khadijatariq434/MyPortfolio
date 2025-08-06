@@ -14,12 +14,12 @@ const projects = [
   },
   {
     id: 2,
-    title: "Real Time Chatting App",
-    description: "A basic real-time chat app using Node.js, Express, EJS, and Socket.io for instant messaging.",
-    tags: ["Node.js", "Ejs", "Tailwind CSS"],
-    image: "/chatify.png",
-    github: "https://github.com/Khadijatariq434/Chatify",
-    live: "#"
+    title: "Real Time Weather App",
+    description: "Get real-time weather updates, forecasts, and alerts for any location with an interactive UI.",
+    tags: ["React", "Tailwind CSS"],
+    image: "/weather.png",
+    github: "https://github.com/Khadijatariq434/weather-app",
+    live: "https://weather-app-git-main-khadijatariq434s-projects.vercel.app/"
   },
   {
     id: 3,
@@ -47,7 +47,16 @@ const projects = [
     image: "/airbnb.png",
     github: "https://github.com/Khadijatariq434/noteApp",
     live: "#"
-  }
+  },
+   {
+    id: 6,
+    title: "Real Time Chatting App",
+    description: "A basic real-time chat app using Node.js, Express, EJS, and Socket.io for instant messaging.",
+    tags: ["Node.js", "Ejs", "Tailwind CSS"],
+    image: "/chatify.png",
+    github: "https://github.com/Khadijatariq434/Chatify",
+    live: "#"
+  },
 ];
 
 const Work = ({ isDarkMode }) => {
