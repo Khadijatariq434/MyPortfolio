@@ -138,9 +138,6 @@ const Skills = ({ isDarkMode }) => {
             "API Security",
             "Database Optimization",
             "Responsive Design",
-            "Agile Development",
-            "Test-Driven Development",
-            "CI/CD Pipelines",
             "Performance Optimization"
           ].map((skill) => (
             <motion.span 
