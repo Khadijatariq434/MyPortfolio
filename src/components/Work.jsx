@@ -5,12 +5,12 @@ import { useState } from 'react';
 const projects = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "Full-featured online store with payment integration, admin dashboard, and product management.",
-    tags: ["React", "Node.js", "MongoDB"],
-    image: "/shopix.png",
-    github: "https://github.com/Khadijatariq434/shopix",
-    live: "#"
+    title: "ArtVista-a platform for artists",
+    description: "a modern platform to explore and shop unique art and decor with ease.",
+    tags: ["React", "Node.js", "MongoDB","Tailwindcss"],
+    image: "/artvista.png",
+    github: "https://github.com/Khadijatariq434/artvista",
+    live: "https://art-vista-gamma.vercel.app/"
   },
   {
     id: 2,
@@ -32,6 +32,15 @@ const projects = [
   },
   {
     id: 4,
+    title: "E-Commerce Platform",
+    description: "Full-featured online store with payment integration, admin dashboard, and product management.",
+    tags: ["React", "Node.js", "MongoDB"],
+    image: "/shopix.png",
+    github: "https://github.com/Khadijatariq434/shopix",
+    live: "#"
+  },
+  {
+    id: 5,
     title: "Note App",
     description: "A backend-powered note-taking app built with Node.js, Express, and EJS, allowing users to add, edit, and delete notes.",
     tags: ["Node.js", "Ejs", "MongoDb"],
@@ -40,7 +49,7 @@ const projects = [
     live: "#"
   },
   {
-    id: 5,
+    id: 6,
     title: "Airbnb Clone",
     description: "A backend-powered airbnb clone built with Node.js, Express, and EJS, allowing users to add, edit, and delete notes.",
     tags: ["Node.js", "Ejs", "MongoDb"],
@@ -49,7 +58,7 @@ const projects = [
     live: "#"
   },
    {
-    id: 6,
+    id: 7,
     title: "Real Time Chatting App",
     description: "A basic real-time chat app using Node.js, Express, EJS, and Socket.io for instant messaging.",
     tags: ["Node.js", "Ejs", "Tailwind CSS"],
